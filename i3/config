@@ -37,6 +37,7 @@ exec --no-startup-id feh --bg-scale wallpapers/archwa.png
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesn’t scale on retina/hidpi displays.
 for_window [class="^.*"] border pixel 0
+#startup scripts
 
 #gaps inner 10
 
@@ -47,6 +48,9 @@ floating_modifier $mod
 
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
+
+#start firefox
+bindsym $mod+b exec firefox
 
 # kill focused window
 bindsym $mod+Shift+q kill
