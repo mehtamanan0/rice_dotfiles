@@ -28,7 +28,7 @@ bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~
 bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
 
 #feh wallpaper
-exec --no-startup-id feh --bg-scale wallpapers/archwa.png 
+exec --no-startup-id feh --bg-scale wallpapers/spacedarks.jpg 
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -51,7 +51,8 @@ bindsym $mod+Return exec xfce4-terminal
 
 #start firefox
 bindsym $mod+b exec firefox
-
+#start thunar
+bindsym $mod+t exec thunar
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -116,6 +117,10 @@ bindsym $mod+a focus parent
 # change workspace
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+
+#synaptic workspace
+#bindsym --whole-window $mod+button4 workspace next_on_output
+#bindsym --whole-window $mod+button5 workspace prev_on_output
 
 # switch to workspace
 bindsym $mod+1 workspace 1
