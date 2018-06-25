@@ -6,13 +6,13 @@
 #
 #start compton
 exec --no-startup-id compton
-þ
+
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
 set $mod Mod4
-new_window 0pixel
+#new_window pixel
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 font pango:System San Francisco Display Display 9
@@ -21,8 +21,14 @@ font pango:System San Francisco Display Display 9
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
 #font pango:DejaVu Sans Mono 8
 
+# Multi-screen screenshots with scrot
+bindsym --release Print exec scrot 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # All screens
+
+# OSX-like area selection screenshots
+bindsym --release Shift+Print exec scrot -s 'screenshot_%Y%m%d_%H%M%S.png' -e 'mkdir -p ~/Pictures/screenshots && mv $f ~/Pictures/screenshots && xclip -selection clipboard -t image/png -i ~/Pictures/screenshots/`ls -1 -t ~/Pictures/screenshots | head -1`' # Area selection
+
 #feh wallpaper
-exec --no-startup-id feh --bg-scale wallpapers/arc_dark_modi.jpg
+exec --no-startup-id feh --bg-scale wallpapers/spacedarks.jpg 
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -31,10 +37,11 @@ exec --no-startup-id feh --bg-scale wallpapers/arc_dark_modi.jpg
 # X core fonts rendering does not support right-to-left and this being a bitmap
 # font, it doesnâ€™t scale on retina/hidpi displays.
 for_window [class="^.*"] border pixel 0
+#startup scripts
 
-#gaps inner 5
+#gaps inner 10
 
-#gaps outer 5
+#gaps outer 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -42,6 +49,10 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec xfce4-terminal
 
+#start firefox
+bindsym $mod+b exec firefox
+#start thunar
+bindsym $mod+t exec thunar
 # kill focused window
 bindsym $mod+Shift+q kill
 
@@ -106,6 +117,11 @@ bindsym $mod+a focus parent
 # change workspace
 bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
+
+#synaptic workspace
+
+bindsym --whole-window button10 workspace next_on_output
+bindsym --whole-window button11 workspace prev_on_output
 
 # switch to workspace
 bindsym $mod+1 workspace 1

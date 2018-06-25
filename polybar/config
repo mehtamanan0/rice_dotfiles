@@ -27,8 +27,9 @@ col = #00f
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 ;monitor = ${env:MONITOR}
+monitor = ${env:MONITOR:}
 width = 100%
-height = 19
+height = 17
 ;offset-x = 1%
 ;offset-y = 1%
 ;radius = 6.0
@@ -52,12 +53,12 @@ module-margin-right = 2
 font-0 = mono:pixelsize=9;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=9;1
-
+font-3 = Font\ Awesome\ 5\ Free:
 #modules-left = i3
-modules-left = i3 mpd
+modules-left = i3
 #modules-center = mpd
 #modules-right = volume wlan eth battery temperature date
-modules-right = home filesystem volume wlan eth battery temperature date
+modules-right = volume wlan battery memory cpufreq date gmail updates-arch-combined info-hackspeed
 
 tray-position = right
 tray-padding = 0
@@ -74,6 +75,93 @@ tray-padding = 0
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
+
+[module/memory]
+
+type = internal/memory
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+
+format = <label> <bar-used>
+#label = RAM %gb_used%/%gb_free%
+
+bar-used-indicator = - 
+bar-used-width = 5
+bar-used-foreground-0 = #55aa55
+bar-used-foreground-1 = #557755
+bar-used-foreground-2 = #f5a70a
+bar-used-foreground-3 = #ff5555
+bar-used-fill = -
+bar-used-empty = -
+bar-used-empty-foreground = #444444
+
+#ramp-used-0 = ▁
+#ramp-used-1 = ▂
+#ramp-used-2 = ▃
+#ramp-used-3 = ▄
+#ramp-used-4 = ▅
+#ramp-used-5 = ▆
+#ramp-used-6 = ▇
+#ramp-used-7 = █
+
+#ramp-free-0 = ▁
+#ramp-free-1 = ▂
+#ramp-free-2 = ▃
+#ramp-free-3 = ▄
+#ramp-free-4 = ▅
+#ramp-free-5 = ▆
+#ramp-free-6 = ▇
+#ramp-free-7 = █
+
+[module/updates-arch-combined]
+type = custom/script
+exec = ~/.config/polybar/updates-arch-combined.sh
+interval = 600
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = ADP1
+full-at = 98
+
+;format-charging = Charging... <label-charging>
+format-charging = <animation-charging> <label-charging>
+
+label-charging-foreground = #ffffff
+;format-discharging = <label-discharging>
+format-discharging = <ramp-capacity> <label-discharging>
+
+format-full-prefix = " "
+format-full-prefix-foreground = ${colors.foreground-alt}
+
+ramp-capacity-0 = 
+ramp-capacity-1 = 
+ramp-capacity-2 = 
+ramp-capacity-foreground = ${colors.foreground-alt}
+
+animation-charging-0 = 
+animation-charging-1 = 
+animation-charging-2 = 
+animation-charging-foreground = ${colors.foreground-alt}
+animation-charging-framerate = 750
+
+[module/info-hackspeed]
+type = custom/script
+exec = ~/.config/polybar/info-hackspeed.sh
+tail = true
+
+[module/gmail]
+type = custom/script
+exec = ~/.config/polybar/gmail/launch.py
+tail = true
+click-left = xdg-open https://mail.google.com
+
+[module/cpufreq]
+
+type = custom/script
+exec = cpupower frequency-info -fm | grep -oP '(?<=frequency: )([^ ]+ [^ ]+)'
+interval = 2
 
 [module/xwindow]
 type = internal/xwindow
@@ -95,26 +183,6 @@ label-indicator-margin = 1
 label-indicator-background = ${colors.secondary}
 label-indicator-underline = ${colors.secondary}
 
-#[module/filesystem]
-#type = internal/fs
-#interval = 25
-#
-#mount-0 = /
-#
-#label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
-#label-unmounted = %mountpoint% not mounted
-#label-unmounted-foreground = ${colors.foreground-alt}
-
-#[module/home]
-#type = internal/fs
-#interval = 25
-#
-#mount-0 = /home
-#
-#label-mounted = %{F#0a81f5}~%{F-}: %percentage_used%%
-#label-unmounted = %mountpoint% not mounted
-#label-unmounted-foreground = ${colors.foreground-alt}
-
 [module/bspwm]
 type = internal/bspwm
 
@@ -134,11 +202,35 @@ label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
+[module/wlan]
+type = internal/network
+interface = wlp6s0
+interval = 3.0
+
+format-connected = <ramp-signal> <label-connected>
+;format-connected-underline = #9f78e1
+label-connected = %essid%
+label-connected-foreground = #ffffff
+;format-disconnected =
+format-disconnected = <label-disconnected>
+;label-disconnected = %ifname% disconnected
+label-disconnected = no wifi
+#label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = #ffffff
+
+ramp-signal-0 = 
+ramp-signal-1 = 
+ramp-signal-2 = 
+ramp-signal-3 = 
+ramp-signal-4 = 
+ramp-signal-foreground = ${colors.foreground-alt}
+
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>
 index-sort = true
 wrapping-scroll = false
+enable-click = false
 
 ; Only show workspaces on the same output as the bar
 ;pin-workspaces = true
@@ -169,91 +261,12 @@ label-urgent = %index%
 label-urgent-background = ${module/bspwm.label-urgent-background}
 label-urgent-padding = ${module/bspwm.label-urgent-padding}
 
-[module/mpd]
-type = internal/mpd
-format-online = <label-song> <label-time>
-#<icon-prev> <toggle> <icon-next>
-#<toggle>
-
-icon-prev = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-#icon-prev = <-
-#icon-stop = X
-#icon-play-prefix = #f00
-#icon-play = (Paused)
-#icon-pause =
-#icon-next = ->
-
-;bar-progress-width = 45
-;bar-progress-indicator = |
-;bar-progress-fill = -
-;bar-progress-empty = -
-
-label-song =  %artist% - %title%
-label-song-maxlen = 70
-label-song-ellipsis = true
-
-[module/xbacklight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = |
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
-
-[module/backlight-acpi]
-inherit = module/xbacklight
-type = internal/backlight
-card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage%%
-
-[module/memory]
-type = internal/memory
-interval = 2
-format-prefix = " "
-format-prefix-foreground = ${colors.foreground-alt}
-label = %percentage_used%%
-
-[module/wlan]
-type = internal/network
-interface = wlp6s0
-interval = 3.0
-
-format-connected = <ramp-signal> <label-connected>
-;format-connected-underline = #9f78e1
-label-connected = %essid%
-label-connected-foreground = #ffffff
-;format-disconnected =
-format-disconnected = <label-disconnected>
-;label-disconnected = %ifname% disconnected
-label-disconnected = no wifi
-#label-disconnected-foreground = ${colors.foreground-alt}
-label-disconnected-foreground = #ffffff
-
-ramp-signal-0 = 
-ramp-signal-1 = 
-ramp-signal-2 = 
-ramp-signal-3 = 
-ramp-signal-4 = 
-ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
@@ -272,14 +285,15 @@ label-disconnected = no eth
 label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
+
 type = internal/date
 interval = 5
 
-date = " %a, %b %d, %Y"
+date = " %a, %b %d"
 ;date-alt = " %a, %b %d, %Y at %I:%M%p"
 ;date-alt = " %Y-%m-%d"
 
-time = " at %I:%M%p"
+time = "%I:%M%p"
 ;time-alt = %H:%M:%S
 ;time-alt = %H:%M:%S
 
@@ -290,6 +304,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 label = %date% %time%
 
 label-foreground = #ffffff
+
 [module/volume]
 type = internal/alsa
 
@@ -304,14 +319,7 @@ format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
 bar-volume-width = 10
-#bar-volume-foreground-0 = ${xrdb:color10}
-#bar-volume-foreground-1 = ${xrdb:color10}
-#bar-volume-foreground-2 = ${xrdb:color10}
-#bar-volume-foreground-3 = ${xrdb:color10}
-#bar-volume-foreground-4 = ${xrdb:color10}
-#bar-volume-foreground-5 = ${xrdb:color11}
-#bar-volume-foreground-6 = ${xrdb:color1}
-bar-volume-foreground-0 = #6FB3D2
+ar-volume-foreground-0 = #6FB3D2
 bar-volume-foreground-1 = #6FB3D2
 bar-volume-foreground-2 = #6FB3D2
 bar-volume-foreground-3 = #6FB3D2
@@ -326,33 +334,6 @@ bar-volume-fill-font = 2
 bar-volume-empty = -
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = ADP1
-full-at = 98
-
-;format-charging = Charging... <label-charging>
-format-charging = <animation-charging> <label-charging>
-
-label-charging-foreground = #ffffff
-;format-discharging = <label-discharging>
-format-discharging = <ramp-capacity> <label-discharging>
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
@@ -371,33 +352,6 @@ ramp-0 = 
 ramp-1 = 
 ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
-
-[module/powermenu]
-type = custom/menu
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 = reboot
-menu-0-0-exec = menu-open-1
-menu-0-1 = power off
-menu-0-1-exec = menu-open-2
-
-menu-1-0 = cancel
-menu-1-0-exec = menu-open-0
-menu-1-1 = reboot
-menu-1-1-exec = sudo reboot
-
-menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
-menu-2-1 = cancel
-menu-2-1-exec = menu-open-0
 
 [settings]
 screenchange-reload = true

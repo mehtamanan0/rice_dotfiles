@@ -7,6 +7,8 @@
 #start compton
 exec --no-startup-id compton
 
+exec xrandr | grep 'DP1 connected' && xrandr --output eDP1 --auto --output DP1 --auto --left-of eDP1
+#config start
 # i3 config file (v4)
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
@@ -119,8 +121,9 @@ bindsym $mod+Ctrl+Right workspace next
 bindsym $mod+Ctrl+Left workspace prev
 
 #synaptic workspace
-#bindsym --whole-window $mod+button4 workspace next_on_output
-#bindsym --whole-window $mod+button5 workspace prev_on_output
+
+bindsym --whole-window button10 workspace next_on_output
+bindsym --whole-window button11 workspace prev_on_output
 
 # switch to workspace
 bindsym $mod+1 workspace 1
