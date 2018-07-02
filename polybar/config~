@@ -58,7 +58,7 @@ font-3 = Font\ Awesome\ 5\ Free:
 modules-left = i3
 #modules-center = mpd
 #modules-right = volume wlan eth battery temperature date
-modules-right = pulseaudio wlan battery volume memory cpufreq gmail info-hackspeed  spotify date
+modules-right = pulseaudio volume wlan battery memory cpufreq gmail info-hackspeed date
 
 tray-position = right
 tray-padding = 0
@@ -75,14 +75,6 @@ tray-padding = 0
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
-
-[module/spotify]
-type = custom/script
-interval = 1
-format-prefix = " "
-format = <label>
-label-foreground = #84bd00
-exec = python2 ~/.config/polybar/spotify_status.py -t 15 -f '{song} - {artist}'
 
 [module/pulseaudio]
 type = internal/pulseaudio
@@ -121,16 +113,16 @@ label-volume-foreground = #65B9FF
 
 
 format-muted-prefix = " "
-format-muted-foreground = #65B9FF
+format-muted-foreground = ${colors.foreground-alt}
 label-muted = sound muted
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #65B9FF
-bar-volume-foreground-1 = #65B9FF
-bar-volume-foreground-2 = #65B9FF
-bar-volume-foreground-3 = #65B9FF
-bar-volume-foreground-4 = #65B9FF
-bar-volume-foreground-5 = #65B9FF
+ar-volume-foreground-0 = #6FB3D2
+bar-volume-foreground-1 = #6FB3D2
+bar-volume-foreground-2 = #6FB3D2
+bar-volume-foreground-3 = #6FB3D2
+bar-volume-foreground-4 = #6FB3D2
+bar-volume-foreground-5 = #6FB3D2
 bar-volume-foreground-6 = #6FB3D2
 bar-volume-gradient = false
 bar-volume-indicator = -
@@ -139,7 +131,7 @@ bar-volume-fill = -
 bar-volume-fill-font = 2
 bar-volume-empty = -
 bar-volume-empty-font = 2
-bar-volume-empty-foreground = #65B9FF
+bar-volume-empty-foreground = ${colors.foreground-alt}
 
 
 
