@@ -1,21 +1,9 @@
 ;=====================================================
 ;
-;   To learn more about how to configure Polybar
-;   go to https://github.com/jaagr/polybar
-;
-;   The README contains alot of information
+; |\/|  /\  |\ |  /\  |\ | 
+; |  | /  \ | \| /  \ | \|
 ;
 ;=====================================================
-
-[colors]
-background = #00000000
-background-alt = #444
-foreground = ${xrdb:color7}
-foreground-alt = #555
-primary = ${xrdb:color3}
-secondary = ${xrdb:color5}
-alert = #bd2c40
-col = #00f
 
 [bar/example]
 monitor = ${env:MONITOR:}
@@ -51,6 +39,18 @@ tray-padding = 0
 
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
+
+
+
+[colors]
+background = #00000000
+background-alt = #444
+foreground = ${xrdb:color7}
+foreground-alt = #555
+primary = ${xrdb:color3}
+secondary = ${xrdb:color5}
+alert = #bd2c40
+col = #00f
 
 [module/spotify]
 type = custom/script
