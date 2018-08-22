@@ -8,6 +8,8 @@
 exec --no-startup-id compton
 
 exec xrandr | grep 'DP1 connected' && xrandr --output eDP1 --auto --output DP1 --auto --left-of eDP1
+exec --no-startup-id libinput-gestures-setup stop
+exec --no-startup-id libinput-gestures-setup start
 #config start
 # i3 config file (v4)
 #
@@ -58,6 +60,7 @@ bindsym $mod+t exec thunar
 # kill focused window
 bindsym $mod+Shift+q kill
 
+bindsym $mod+q exec blueberry 
 # start dmenu (a program launcher)
 #bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications

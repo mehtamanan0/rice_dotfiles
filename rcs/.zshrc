@@ -76,6 +76,7 @@ plugins=(
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
+alias searchwa="ls | grep"
 alias wi="sudo wifi-menu"
 alias cricket="ssh cricket"
 alias oracle="ssh opc@130.61.50.178"
@@ -105,3 +106,5 @@ export SSH_KEY_PATH="~/.ssh/rsa_id"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

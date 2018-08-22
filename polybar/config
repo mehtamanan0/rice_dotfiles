@@ -32,7 +32,7 @@ font-2 = Wuncon Siji:pixelsize=9;1
 font-3 = Font\ Awesome\ 5\ Free:
 
 modules-left = i3
-modules-right = pulseaudio wlan battery memory cpufreq gmail info-hackspeed  spotify date
+modules-right = backlight pulseaudio wlan battery memory cpufreq info-hackspeed  spotify date
 
 tray-position = right
 tray-padding = 0
@@ -40,7 +40,15 @@ tray-padding = 0
 scroll-up = i3wm-wsnext
 scroll-down = i3wm-wsprev
 
+[module/backlight]
+type = internal/xbacklight
 
+format-b = <bar-b>
+
+bar-b-width = 100
+bar-b-indicator = |
+bar-b-fill = ─
+bar-b-empty = ─
 
 [colors]
 background = #00000000
