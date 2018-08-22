@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="xfce4-panel" version="1.0">
+  <property name="configver" type="int" value="2"/>
+  <property name="panels" type="array">
+    <value type="int" value="1"/>
+    <property name="panel-1" type="empty">
+      <property name="position" type="string" value="p=2;x=1223;y=14"/>
+      <property name="length" type="uint" value="1"/>
+      <property name="position-locked" type="bool" value="true"/>
+      <property name="size" type="uint" value="24"/>
+      <property name="plugin-ids" type="array">
+        <value type="int" value="21"/>
+        <value type="int" value="5"/>
+        <value type="int" value="6"/>
+        <value type="int" value="2"/>
+        <value type="int" value="12"/>
+        <value type="int" value="3"/>
+        <value type="int" value="4"/>
+        <value type="int" value="1"/>
+      </property>
+      <property name="background-alpha" type="uint" value="0"/>
+      <property name="mode" type="uint" value="0"/>
+      <property name="enter-opacity" type="uint" value="100"/>
+      <property name="leave-opacity" type="uint" value="100"/>
+      <property name="background-style" type="uint" value="1"/>
+      <property name="background-color" type="array">
+        <value type="uint" value="9766"/>
+        <value type="uint" value="9766"/>
+        <value type="uint" value="9766"/>
+        <value type="uint" value="65535"/>
+      </property>
+      <property name="disable-struts" type="bool" value="true"/>
+      <property name="length-adjust" type="bool" value="true"/>
+      <property name="nrows" type="uint" value="1"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
+    </property>
+  </property>
+  <property name="plugins" type="empty">
+    <property name="plugin-6" type="string" value="systray">
+      <property name="names-visible" type="array">
+        <value type="string" value="thunar"/>
+        <value type="string" value="netctl-gui"/>
+        <value type="string" value="networkmanager applet"/>
+        <value type="string" value="task manager"/>
+        <value type="string" value="wicd-client.py"/>
+        <value type="string" value="orage"/>
+        <value type="string" value="xfce terminal"/>
+        <value type="string" value="chromium"/>
+        <value type="string" value="gpick"/>
+        <value type="string" value="slack"/>
+        <value type="string" value="franz"/>
+      </property>
+    </property>
+    <property name="plugin-2" type="string" value="power-manager-plugin"/>
+    <property name="plugin-12" type="string" value="pulseaudio">
+      <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
+    </property>
+    <property name="plugin-21" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-5" type="string" value="clock">
+      <property name="timezone" type="string" value="Asia/Kolkata"/>
+      <property name="digital-format" type="string" value="%I:%M %p"/>
+      <property name="mode" type="uint" value="2"/>
+      <property name="true-binary" type="bool" value="true"/>
+      <property name="show-inactive" type="bool" value="true"/>
+      <property name="show-seconds" type="bool" value="true"/>
+      <property name="show-grid" type="bool" value="false"/>
+      <property name="show-military" type="bool" value="false"/>
+      <property name="tooltip-format" type="string" value="%A %d %B %Y"/>
+    </property>
+    <property name="plugin-3" type="string" value="screenshooter"/>
+    <property name="plugin-4" type="string" value="directorymenu">
+      <property name="base-directory" type="string" value="/home/manan"/>
+    </property>
+    <property name="plugin-1" type="string" value="xfce4-notes-plugin"/>
+  </property>
+</channel>
